@@ -140,3 +140,56 @@ The following GitHub operations returned commit SHAs:
 - Delivery journal update: 5797b65bdc198d3991b86cc8857e1c849088b20c
 
 A later fetch verified README, REPORT-LOG, and mathcore files are readable from the GitHub repository. The container could not clone GitHub because DNS/network access was unavailable; therefore tests were not run against the committed checkout. This remains NOT RUN/BLOCKED, not PASS.
+
+
+## ادامهٔ ژورنال — D8، Merkle، بردار سه‌بعدی و CI
+
+### چرخهٔ TDD
+- تست‌های D8 و Merkle ابتدا اضافه شدند و در مرحلهٔ RED به‌دلیل نبود توابع مورد انتظار شکست خوردند.
+- پس از پیاده‌سازی، تست‌های پایهٔ همان قابلیت‌ها سبز شدند.
+- یک تست قانون بستگی D8 در برابری دقیق floatها حساس بود؛ معیار تست به مقایسهٔ عددی با تلورانس تبدیل شد، چون حاصل ضرب ماتریس‌های اعشاری ممکن است اختلافی در حد خطای ممیز شناور داشته باشد.
+- یک نقص مهم در مدل اعتماد زنجیره کشف شد: بدون expected_head مورد اعتماد، دستکاری آخرین رویداد به‌تنهایی از زنجیره قابل تشخیص نیست. API به پارامتر expected_head مجهز شد و آزمون tamper برای آن اضافه شد.
+- سپس Vec3 (جمع، تفریق، dot، cross، norm، normalization با رد بردار صفر)، شاخص‌های in-degree/out-degree و چگالی گراف جهت‌دار اضافه شدند.
+
+### قراردادهای ریاضی/داده
+- D8 در این پروژه به معنی گروه دیهدری هشت‌ضلعی با ۱۶ عضو است: ۸ دوران به مضارب π/4 و ۸ بازتاب.
+- چگالی گراف جهت‌دار به‌صورت گراف ساده تعریف شد: یال‌های موازی یک زوج مرتب را یک‌بار می‌شمارند، self-loop در چگالی لحاظ نمی‌شود و برای کمتر از دو گره مقدار صفر دارد. درجهٔ ورودی/خروجی یال‌های موازی را جداگانه می‌شمارد.
+- Merkle: برگ‌ها با 0x00 و والدها با 0x01 domain-separated می‌شوند؛ در سطح با تعداد فرد، آخرین هش تکرار می‌شود؛ درخت خالی ریشهٔ تعریف‌شده دارد. این قرارداد سادهٔ SSG است و ادعای سازگاری با RFC 6962 ندارد.
+- expected_head باید در checkpoint مورد اعتماد یا سند امضاشده نگهداری شود؛ خود زنجیره مرجع اعتماد مستقل نیست.
+
+### آزمون‌ها
+در محیط محلی روی checkout بازسازی‌شده از محتوای خوانده‌شده از GitHub:
+- `PYTHONPATH=src python -m unittest discover -s tests -v`: **19 tests, OK**.
+- `python -m compileall -q src tests`: موفق، بدون خطا.
+این نتایج مربوط به اجرای محلی‌اند؛ نتیجهٔ GitHub Actions تا زمان بررسی جداگانه، NOT RUN/PENDING باقی می‌ماند.
+
+### فایل‌های جدید
+- `tests/test_advanced.py`: آزمون D8 (تعداد اعضا، حفظ نرم، بستگی)، Merkle (اثبات عضویت، درخت فرد، دستکاری و ورودی نامعتبر)، checkpoint، Vec3 و metrics گراف.
+- `assets/visual-shadow-atlas.svg`: پوستر برداری معماری؛ تصویر قابل مشاهده و قابل نسخه‌بندی، اما حامل lossless داده نیست.
+- `.github/workflows/tests.yml`: اجرای خودکار compileall و unittest در Push/PR به main.
+- `.gitignore`: نادیده‌گرفتن cache و build artifacts پایتون.
+
+### Commitهای مرحلهٔ دوم
+- D8 math: 1221eb6b7a252babd92c3e493319fef66d1077b0
+- D8 byte/algorithm and Vec3: 8721ea12bd4bd7e9c71e69b8d32915966b75c6f6
+- Merkle + anchored chain initial: 25247efd159f0f941a2488ecb357ff11e4da95c9
+- Merkle domain-byte correction: 4ee1d6b87d8b6f9de4c8dbb7bc967b34475c773b
+- Advanced tests: 504d858e11ab0b5b3d83f06c0f296eab0293f0c5
+- Vec3/graph metrics tests: 08b3eb20de1711abd73dee1f0b2254dcfc3a7333
+- Graph metrics: 8df9f88e0739d450ec39f3768624cae35c20fc30
+- Visual Shadow SVG poster: 66dfcd0998adbdda38a17a12b0ac8a3710ded107
+- Math foundations update: 4c2268d51d9a4f249e70b4b5b6ded20170cf12c1
+- Merkle convention docs: 69a57ae28422230133da635f5d77d467db61646a
+- Handoff update: f1e101275d101c8c0fcfc855c1ec5cb8ab8f3f68
+- README update: 95fe8cb92581dc8d26ceeaf45fd22f60e5ee1da9
+- GitHub Actions: 8153bcb69070365bdbd28c7b61d1bd18f4041e69
+- gitignore: 7ed4608fc2ddf57f510de6833612d5672a1da0a8
+
+### باقی‌مانده‌ها
+- بررسی اجرای واقعی GitHub Actions.
+- ساخت Merkle consistency proofs، نه فقط inclusion proofs.
+- تکمیل matrix/vector API و ماتریس‌های 3D.
+- Git ingestion واقعی و ساخت graph snapshot از repository.
+- OCR و ارزیابی CER/WER برای فارسی و انگلیسی.
+- lossless carrier با benchmark ظرفیت، خطا و مقاومت در برابر آسیب.
+- آپلود PNG رستری قبلی هنوز انجام نشده؛ SVG برداری در مخزن موجود است.
