@@ -66,3 +66,17 @@ Run locally:
 `PYTHONPATH=src python -m unittest discover -s tests -v`
 
 The Visual Shadow poster is in `assets/visual-shadow-atlas.svg`. It is a vector architecture map, not a payload-carrying lossless image.
+
+
+## Local source-tree scan
+
+A read-only folder scanner now builds a graph with file SHA-256 hashes, stable repository-scoped node IDs, a canonical graph snapshot hash, an SVG overview, and a JSON manifest.
+
+```bash
+PYTHONPATH=src python examples/scan_directory.py /path/to/project \
+  --repository-id owner/project \
+  --revision <commit-or-working-tree-label> \
+  --output /path/outside/source
+```
+
+The scanner does not inspect Git commit history, execute source files, follow symlinks, or preserve file bytes inside the SVG. See `docs/10-source-ingestion.md`.
