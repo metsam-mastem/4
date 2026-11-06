@@ -106,10 +106,11 @@ def ingest_git_history(
     )
 
     graph = KnowledgeGraph()
+    repo_uri = quote(repo_id, safe="/")
     root_id = stable_node_id(repo_id, "git_repository", ".")
     graph.add_node(Node(
         root_id, "git_repository", repo_id,
-        source_uri=f"git+repo://{quote(repo_id, safe=chr(47))}",
+        source_uri=f"git+repo://{repo_uri}",
         source_version="git-history",
         metadata={"repository_id": repo_id},
     ))
