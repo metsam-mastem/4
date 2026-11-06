@@ -59,3 +59,31 @@ class CheckpointAcceptanceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Vector3AcceptanceTests(unittest.TestCase):
+    def test_vec3_dot_cross_and_norm(self):
+        from ssg.mathcore import Vec3
+        a, b = Vec3(1, 0, 0), Vec3(0, 1, 0)
+        self.assertEqual(a.dot(b), 0)
+        self.assertEqual(a.cross(b), Vec3(0, 0, 1))
+        self.assertAlmostEqual(Vec3(2, 3, 6).norm(), 7)
+
+    def test_zero_vector_cannot_be_normalized(self):
+        from ssg.mathcore import Vec3
+        with self.assertRaises(ValueError):
+            Vec3(0, 0, 0).normalized()
+
+
+class DirectedGraphMetricsTests(unittest.TestCase):
+    def test_directed_degree_and_density(self):
+        from ssg.graph import graph_density, in_degree, out_degree
+        from ssg.graph import KnowledgeGraph, Node, Edge
+        graph = KnowledgeGraph()
+        for node_id in ("a", "b", "c"):
+            graph.add_node(Node(node_id, "test", node_id))
+        graph.add_edge(Edge("ab", "a", "b", "depends"))
+        graph.add_edge(Edge("ac", "a", "c", "links"))
+        self.assertEqual(out_degree(graph, "a"), 2)
+        self.assertEqual(in_degree(graph, "a"), 0)
+        self.assertAlmostEqual(graph_density(graph), 2 / 6)
