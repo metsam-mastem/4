@@ -10,7 +10,7 @@ class SourceIngestionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)/"demo-repo"
             (root/"src"/"core").mkdir(parents=True)
-            payload=b"print('SSG')\\n"
+            payload=b"print('SSG')\n"
             (root/"src"/"core"/"main.py").write_bytes(payload)
             graph=ingest_directory(root,revision="abc123")
             self.assertEqual(graph.validate(),[])
