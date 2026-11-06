@@ -34,3 +34,12 @@ Implemented in the reference core:
 - Advanced acceptance tests for group closure, norm preservation, odd-leaf Merkle proofs, tamper rejection, Vec3, and graph metrics.
 
 Local run on the assembled reference checkout: 19 tests passed (the suite was aligned to the two committed test files). The remote GitHub checkout itself was not executed because network/DNS was unavailable in the container; the files were retrieved and written through the GitHub connector. The local sources were assembled from the fetched repository contents and the just-authored changes. A GitHub Actions workflow has now been committed at .github/workflows/tests.yml; remote CI status still needs to be checked.
+
+
+## Working-tree ingestion update
+
+A bounded read-only filesystem adapter is now implemented at `src/ssg/ingest.py`. It creates repository/directory/file nodes, `contains` edges, file SHA-256 hashes, portable `repo://` source URIs, repository-scoped stable IDs, and a deterministic graph snapshot digest. It excludes common cache/VCS directories, skips symlinks, hashes in chunks, detects simple file mutation during hashing, and enforces node/byte limits.
+
+The example CLI is `examples/scan_directory.py`. Output must be outside the source tree. It emits a simple SVG and JSON manifest. This is **not a Git history adapter**: commits, branches, tags, blame, diffs, Git LFS objects, source parsing, and OCR are not implemented.
+
+Current local test suite: **27 tests passed**; compileall passed; a synthetic scan produced 5 nodes, 4 edges, 2 files, and 2 directories. Remote GitHub Actions status has not been verified.
