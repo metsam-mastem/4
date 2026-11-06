@@ -263,3 +263,37 @@ Commit status query برای commit ژورنال، status entry برنگردان
 - نمونهٔ اسکن پروژهٔ ساختگی: PASS، 5 node / 4 edge / 2 file / 2 directory و تولید SVG/manifest.
 - GitHub Actions: NOT VERIFIED.
 - Git history ingestion، OCR، Merkle consistency proof، lossless visual carrier: NOT IMPLEMENTED.
+
+
+## ادامهٔ ژورنال — Git History Adapter | 2026-11-06
+
+### دامنه
+افزودن آداپتور مستقل و فقط‌خواندنی برای تاریخچهٔ Git به SSG، بدون ادغام آن با اسکنر working-tree و بدون اجرای کد مخزن ورودی.
+
+### چرخهٔ تست
+- ابتدا tests/test_git_ingest.py با چهار سناریو ثبت شد: commit/branch/tag/parent، محدودیت تعداد commit، مسیر غیرمخزن و مخزن خالی.
+- اجرای CI روی commit تستی به حالت failure رسید؛ این RED مورد انتظار پیش از وجود ماژول بود.
+- سپس src/ssg/git_ingest.py پیاده‌سازی و commit شد؛ CI جدید برای آن در وضعیت queued مشاهده شد.
+- تا مشاهدهٔ نتیجهٔ اجرای جدید، تست‌ها PASS محسوب نمی‌شوند.
+
+### طراحی پیاده‌سازی
+- فرمان‌های Git با آرایهٔ argv و بدون shell اجرا می‌شوند.
+- ورودی باید ریشهٔ working tree باشد؛ symlink root رد می‌شود.
+- promptهای تعاملی، system/global config و optional lockها غیرفعال‌اند.
+- هر فرمان timeout مستقل دارد.
+- سقف commit با دریافت یک رکورد اضافه کنترل می‌شود؛ عبور از سقف به خطا منجر می‌شود و گراف ناقص برنمی‌گردد.
+- commitها، parent edgeها، branchها و tagهای محلی به گراف تبدیل می‌شوند.
+- والدهای shallow/unavailable به شکل boundary node ثبت می‌شوند.
+- checkout، اجرای hook یا source code، خواندن blobها و تغییر مخزن انجام نمی‌شود.
+
+### فایل‌ها و commitها
+- tests/test_git_ingest.py — 1b9dcbea8162b330108f16554cfa86cae8b4fe3e (RED test commit)
+- src/ssg/git_ingest.py — a3cf3d315e77e7d7322c929e20fd5fa522033150 (implementation commit)
+- مستندات README، source ingestion، handoff و roadmap در همین دور تکمیل شدند.
+
+### وضعیت
+- تست‌نویسی قبل از پیاده‌سازی: PASS (ترتیب commitها قابل مشاهده است).
+- پیاده‌سازی آداپتور: COMMITTED.
+- اجرای CI پیاده‌سازی: PENDING در زمان ثبت این گزارش.
+- اجرای محلی در این محیط: NOT RUN.
+- remote refs، diff/tree/blob، blame، LFS، parser معنایی و OCR: NOT IMPLEMENTED.
