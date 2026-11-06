@@ -10,18 +10,21 @@ def main() -> int:
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("root",type=Path,help="Source directory to inspect (read-only)")
     parser.add_argument("--revision",default="working-tree")
+    parser.add_argument("--repository-id",default=None,help="Unique namespace, e.g. owner/repository")
     parser.add_argument("--output",type=Path,default=Path("ssg-output"))
     parser.add_argument("--max-nodes",type=int,default=100_000)
     parser.add_argument("--max-total-bytes",type=int,default=20*1024**3)
     args=parser.parse_args()
-    graph=ingest_directory(args.root,revision=args.revision,max_nodes=args.max_nodes,max_total_bytes=args.max_total_bytes)
+    graph=ingest_directory(args.root,revision=args.revision,repository_id=args.repository_id,
+                           max_nodes=args.max_nodes,max_total_bytes=args.max_total_bytes)
     args.output.mkdir(parents=True,exist_ok=True)
     svg_path=args.output/"visual-shadow.svg"
     manifest_path=args.output/"snapshot-manifest.json"
     svg_path.write_text(render_svg(graph,title=f"SSG — {args.root.name}"),encoding="utf-8")
     manifest={
         "schema_version":"0.1.0","project":"SSG",
-        "source_root_label":args.root.name,"revision":args.revision,
+        "source_root_label":args.root.name,"repository_id":args.repository_id or args.root.name,
+        "revision":args.revision,
         "graph_snapshot_sha256":snapshot_hash(graph),
         "node_count":len(graph.nodes),"edge_count":len(graph.edges),
         "file_count":sum(node.type=="file" for node in graph.nodes.values()),
