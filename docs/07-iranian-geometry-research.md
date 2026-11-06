@@ -8,7 +8,7 @@ Sources:
 1. Geometric proportions: The underlying structure of design process for Islamic geometric patterns, Frontiers of Architectural Research (2012): https://doi.org/10.1016/j.foar.2012.08.005
 2. Geometry and Proportion of Conical Domes' Plans in Iran: https://pureportal.coventry.ac.uk/en/publications/geometry-and-proportion-of-conical-domes-plans-in-iran-reviewing-/
 3. Hidden geometry in Iranian Zandiyeh sacred buildings, Vakil Mosque case study (2023): https://doi.org/10.1080/16874048.2023.2277084
-4. Traditional home courtyards of Behbahan (Qajar/Pahlavi): https://www.magiran.org/paper/2331452/proportions-of-traditional-home-courtyards-of-beh-bahan-qajar-and-pahlavi-period?lang=en
+4. Traditional home courtyards of Behbahan (Qajar/Pahlavi): https://www.magiran.org/paper/2331452/proportions-of-traditional-home-courtyards-of-behbah-an-qajar-and-pahlavi-period?lang=en
 5. Nabavi & Yahaya (2016), 80 traditional courtyard houses: https://knova.um.edu.my/research_publications_2016_2020/440/
 6. Safavid school semi-open spaces study: https://www.magiran.com/volume/243083
 
