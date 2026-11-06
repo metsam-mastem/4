@@ -43,3 +43,10 @@ A bounded read-only filesystem adapter is now implemented at `src/ssg/ingest.py`
 The example CLI is `examples/scan_directory.py`. Output must be outside the source tree. It emits a simple SVG and JSON manifest. This is **not a Git history adapter**: commits, branches, tags, blame, diffs, Git LFS objects, source parsing, and OCR are not implemented.
 
 Current local test suite: **27 tests passed**; compileall passed; a synthetic scan produced 5 nodes, 4 edges, 2 files, and 2 directories. Remote GitHub Actions status has not been verified.
+
+
+## Git metadata ingestion — 2026-11-06
+
+A bounded, read-only Git metadata adapter was added at src/ssg/git_ingest.py. It records commits reachable from local refs, parent ancestry, local branches and tags. Shallow or unavailable parent objects are explicit boundary nodes. The adapter uses fixed subprocess argument vectors (no shell), per-command timeouts, prompt suppression and a hard commit cap; it does not checkout, run project code, inspect blobs or mutate the repository.
+
+Tests were added first in tests/test_git_ingest.py and the initial red CI run was observed after the test-only commit. The implementation commit then triggered a new CI run. Its result must be checked before this feature is marked PASS. Remote refs, diff/tree/blob ingestion, blame, LFS and semantic parsing remain NOT IMPLEMENTED.
