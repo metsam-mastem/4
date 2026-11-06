@@ -297,3 +297,30 @@ Commit status query برای commit ژورنال، status entry برنگردان
 - اجرای CI پیاده‌سازی: PENDING در زمان ثبت این گزارش.
 - اجرای محلی در این محیط: NOT RUN.
 - remote refs، diff/tree/blob، blame، LFS، parser معنایی و OCR: NOT IMPLEMENTED.
+
+
+## نتیجهٔ نهایی Git History Adapter — 2026-11-06
+
+- آداپتور metadata-only تاریخچهٔ Git در src/ssg/git_ingest.py ثبت شد.
+- آزمون‌ها در tests/test_git_ingest.py ابتدا به‌صورت RED ثبت شدند؛ سپس پیاده‌سازی اضافه شد.
+- چهار سناریوی اولیه و یک آزمون اضافه برای جلوگیری از افشای مسیر checkout در URI مخزن پوشش داده شد.
+- یک اصلاح quoting در مسیر URI در CI شکست خورد؛ قبل از تحویل اصلاح شد. این شکست میانی پنهان نمی‌شود.
+- آخرین commit کد: 30587c2e856d7d3edbfab0abb385b7b8738a7a8a.
+- آخرین commit آزمون: 4e2b21d4accda4c0da9666857960768bd10b31ba.
+- GitHub Actions run 42167463018: SUCCESS؛ compileall موفق؛ 32 تست اجرا شد و نتیجه OK بود.
+- اجرای CI روی commitهای میانی: یک اجرای RED مورد انتظار برای تست پیش از پیاده‌سازی و دو اجرای FAIL ناشی از خطای quoting؛ هر دو اصلاح شدند. نتیجهٔ نهایی آخرین commit موفق است.
+- اجرای محلی در محیط این مکالمه انجام نشد؛ PASS مربوط به CI روی GitHub Actions است.
+
+### وضعیت فعلی چهار جریان کاری SSG
+1. پایه‌های علمی و ریاضی: موجود؛ توسعهٔ ماتریس‌های سه‌بعدی و precision tests ادامه دارد.
+2. مشخصات مهندسی: graph/provenance/Visual Shadow و ingestion اولیه موجود؛ Git history adapter اضافه شد؛ Merkle consistency/signing و lossless carrier باز هستند.
+3. مستندات تحویل: README، source ingestion، roadmap و handoff به‌روزرسانی شدند.
+4. گزارش کار و handoff: این ژورنال به‌صورت تجمعی به‌روزرسانی شد.
+
+### گام بعدی مصوب در ترتیب فنی
+1. Git tree/diff adapter و source locators دقیق.
+2. استخراج معنایی Markdown و کد به chunkهای قابل ارجاع.
+3. Multi-scale Visual Shadow layout با collision/overflow metrics.
+4. OCR فارسی/انگلیسی با CER/WER benchmark.
+5. Merkle consistency proofs و امضای checkpoint.
+6. طراحی lossless visual carrier و آزمون round-trip/capacity/error-correction.
