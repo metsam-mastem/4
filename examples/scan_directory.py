@@ -19,6 +19,10 @@ def main() -> int:
     output_root=args.output.expanduser().resolve()
     if output_root==source_root or source_root in output_root.parents:
         parser.error("output directory must be outside the source tree")
+    source_root=args.root.expanduser().resolve()
+    output_root=args.output.expanduser().resolve()
+    if output_root==source_root or source_root in output_root.parents:
+        parser.error("output directory must be outside the source tree")
     graph=ingest_directory(args.root,revision=args.revision,repository_id=args.repository_id,
                            max_nodes=args.max_nodes,max_total_bytes=args.max_total_bytes)
     args.output.mkdir(parents=True,exist_ok=True)
