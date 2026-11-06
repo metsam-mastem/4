@@ -4,7 +4,7 @@ Phase 0: freeze semantics, especially += and =+, and define threat model.
 Phase 1: vectors, matrices, rectangles/cuboids, ratio profiles, D4/D8 tests.
 Phase 2: stable graph IDs, typed relations, provenance and snapshots.
 Phase 3: deterministic multi-scale visual layout, legend, mapping and collision checks.
-Phase 4: Git/Markdown/code/PDF/image ingestion and OCR language benchmarks.
+Phase 4: Git metadata/history ingestion, then Markdown/code/PDF/image parsing and OCR language benchmarks.
 Phase 5: deterministic serialization, hashes, hash chain, Merkle inclusion/consistency proofs.
 Phase 6: secure lossless carrier with capacity tests, authenticated encryption, error correction and round-trip.
 Phase 7: local-first Studio and offline export/import.
@@ -20,3 +20,12 @@ CRYPTO-01 modified ciphertext rejected.
 RESOURCE-01 bounded memory/time/pixels/nodes.
 
 All tests remain NOT RUN until executed in a real runtime.
+
+
+## Current execution delta — Git metadata adapter
+
+- GIT-01: enumerate commits reachable from local refs with bounded history — implemented; CI verification pending.
+- GIT-02: preserve parent ancestry and shallow boundaries — implemented; CI verification pending.
+- GIT-03: represent local branches/tags and their targets — implemented; CI verification pending.
+- GIT-04: fail closed on non-repositories, timeouts and commit-cap overflow — implemented; CI verification pending.
+- GIT-05: remote refs, diffs, trees/blobs, rename detection and blame — NOT IMPLEMENTED.
