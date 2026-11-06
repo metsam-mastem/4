@@ -52,6 +52,7 @@ def ingest_directory(
     root: str | Path,
     revision: str = "working-tree",
     *,
+    repository_id: str | None = None,
     max_nodes: int = 100_000,
     max_total_bytes: int = 20 * 1024**3,
     chunk_size: int = 1024 * 1024,
@@ -72,7 +73,9 @@ def ingest_directory(
     if max_nodes < 1 or max_total_bytes < 0 or chunk_size < 1:
         raise ValueError("invalid ingestion resource limits")
 
-    repository_id = base.name or "root"
+    repository_id = repository_id or base.name or "root"
+    if not repository_id.strip():
+        raise ValueError("repository_id must not be blank")
     graph = KnowledgeGraph()
     root_id = stable_node_id(repository_id, "repository", ".")
     graph.add_node(Node(root_id, "repository", repository_id,
