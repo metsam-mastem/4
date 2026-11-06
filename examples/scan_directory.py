@@ -30,7 +30,7 @@ def main() -> int:
     }
     manifest_path.write_text(json.dumps(manifest,indent=2,ensure_ascii=False),encoding="utf-8")
     print(json.dumps(manifest,indent=2,ensure_ascii=False))
-    print(f"SVG: {svg_path}\\nManifest: {manifest_path}")
+    print(f"SVG: {svg_path}\nManifest: {manifest_path}")
     return 0
 
 if __name__=="__main__":
