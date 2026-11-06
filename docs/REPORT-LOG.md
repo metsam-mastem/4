@@ -242,3 +242,24 @@ A later fetch verified README, REPORT-LOG, and mathcore files are readable from 
 4. layout engine چندمقیاسی با collision/overflow metrics.
 5. Merkle consistency proofs و امضای checkpoint.
 6. تست CI از GitHub Actions و گزارش قابل مشاهدهٔ آخرین اجرا.
+
+
+## ثبت کنترل نهایی این دور — 2026-11-06
+
+### Commitهای مستندات و کنترل
+- README با راهنمای اسکن محلی: 21387a6dacebef121fca36aece916c6b78dbbc02
+- هنداف تکمیل‌شدهٔ ingestion: eb28a3c2504f02e21dba8b032ef9eadd6e1302a5
+- ژورنال Source Ingestion: db9e45e906b116d6342728d6eda90999f687dcd2
+- خروجی‌گیری بیرون از source tree: 82236a0bfd2b91f192eeae47f1923fe945755000
+- سند Source Ingestion: 35583bc710a7b3e084ed14514b7c808cb5a8035d
+
+### کنترل نهایی مخزن
+فایل‌های mathcore، graph، provenance، ingestion، دو مجموعه تست، CLI نمونه، سند source ingestion، ژورنال، هنداف، پوستر SVG، workflow و README دوباره از GitHub خوانده شدند. پاسخ fetch برای همهٔ این مسیرها موفق بود.
+Commit status query برای commit ژورنال، status entry برنگرداند؛ بنابراین وضعیت GitHub Actions هنوز **NOT VERIFIED** است و نباید PASS اعلام شود.
+
+### وضعیت آزمون محلی
+- 27 تست: PASS در اجرای محلی.
+- compileall روی src/tests/examples: PASS.
+- نمونهٔ اسکن پروژهٔ ساختگی: PASS، 5 node / 4 edge / 2 file / 2 directory و تولید SVG/manifest.
+- GitHub Actions: NOT VERIFIED.
+- Git history ingestion، OCR، Merkle consistency proof، lossless visual carrier: NOT IMPLEMENTED.
