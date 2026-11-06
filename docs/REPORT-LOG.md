@@ -110,3 +110,33 @@ Source traceability، identity stability، graph integrity، provenance complete
 5. Git ingestion adapter و source locator.
 6. تولید SVG poster از graph واقعی و ثبت node-to-source mapping.
 7. طراحی threat model و capacity benchmark قبل از visual lossless carrier.
+
+
+## Commit ledger — 2026-11-06
+
+The following GitHub operations returned commit SHAs:
+- README initial: c50aaf1fdc6d331d44011c547fc17c95e060c06a
+- Project charter: a72885fc27dbf1efa8b622514216376b79d8db57
+- Architecture: 4386097051ecaf7a15bd4d99e7440b5ea653ad8c
+- Mathematical foundations: c244f0b2f37d93d76bdd0c061b458d2385af2dea
+- Proportion engine: c1aa9d06baaa6e16fcb6961558f8a4ac190b73b8
+- Precision KPIs: 92857f71009b01634f4eab7d7744959278d0cbac
+- Visual Shadow: b9fea2404f2ef98aaadde5bc7ee40d0ab61e50c5
+- Blockchain provenance: ae0b5b755af355ff3c97e9f6c59a1f71d2dfe84e
+- Iranian geometry research first write: 7567786d6ce9015dbfb991abbff045567549aed4
+- Handoff: c98515b44e96f79c6bb251ddfbc6d15275e0216f
+- Report journal first write: e7692e2a7b2381d238874609a27df210d37208b7
+- Python package init: ea52bcec21f1af32cd02dc248464386a9df8087c
+- Math core: 1b280db7ac3fefc03a7dd6fa02ab6320f8599b57
+- Graph core: a5c364ccc5070dbaaac8eff3c3b06f60ff3191bb
+- Provenance core: 59a6b4326a635d79133f9fdd1f5c7a648fdc16e3
+- SVG renderer: 243acc37ffe05af430af022563e7da5fc2b7e949
+- Unit tests authored: 99108cc3c499859a49dd0f6a10881dc7914f04c8
+- Roadmap: 0aad67d2e2128e836613fd2aaa281af31e20b888
+- Poster prompt: ff2207aaaf70e283a24bc757c50e441bca69419c
+- Example manifest: 86d7b3283d1e63a0485ff205d879934e3d580d7f
+- Python project metadata: efb25e9460054648faee0d8a5b60e5aa1a8e92a6
+- Research URL correction: 95b77ad96fa47946b9407f14802cfaaa5f02716c
+- Delivery journal update: 5797b65bdc198d3991b86cc8857e1c849088b20c
+
+A later fetch verified README, REPORT-LOG, and mathcore files are readable from the GitHub repository. The container could not clone GitHub because DNS/network access was unavailable; therefore tests were not run against the committed checkout. This remains NOT RUN/BLOCKED, not PASS.
