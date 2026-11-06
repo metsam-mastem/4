@@ -72,3 +72,35 @@ def d4_orbit(point):
 def fit_ratio(rect,target,tolerance=0.01):
     if tolerance<0: raise ValueError("tolerance must be non-negative")
     return ratio_error(rect.ratio,target)[1]<=tolerance
+
+
+def d8_matrices():
+    """Return the 16 orthogonal symmetries of a regular octagon.
+
+    Convention: rotations by k*pi/4 and each rotation composed with
+    reflection across the x-axis. Matrices are rounded for stable keys.
+    """
+    from math import pi
+    matrices = []
+    reflection = ((1.0, 0.0), (0.0, -1.0))
+    for k in range(8):
+        theta = k * pi / 4
+        c, s = cos(theta), sin(theta)
+        rotation = ((c, -s), (s, c))
+        matrices.append(tuple(tuple(round(v, 12) for v in row) for row in rotation))
+        composed = (
+            (rotation[0][0] * reflection[0][0] + rotation[0][1] * reflection[1][0],
+             rotation[0][0] * reflection[0][1] + rotation[0][1] * reflection[1][1]),
+            (rotation[1][0] * reflection[0][0] + rotation[1][1] * reflection[1][0],
+             rotation[1][0] * reflection[0][1] + rotation[1][1] * reflection[1][1]),
+        )
+        matrices.append(tuple(tuple(round(v, 12) for v in row) for row in composed))
+    return tuple(dict.fromkeys(matrices))
+
+
+def apply_matrix(matrix, point):
+    """Apply a 2x2 matrix represented by two row tuples to Vec2."""
+    if len(matrix) != 2 or any(len(row) != 2 for row in matrix):
+        raise ValueError("matrix must be 2x2")
+    return Vec2(matrix[0][0]*point.x + matrix[0][1]*point.y,
+                matrix[1][0]*point.x + matrix[1][1]*point.y)
