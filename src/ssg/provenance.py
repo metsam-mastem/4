@@ -38,17 +38,17 @@ def verify_chain(events, expected_head=None):
 def _leaf_hash(data):
     if not isinstance(data, bytes):
         raise TypeError("Merkle leaves must be bytes")
-    return hashlib.sha256(b"\\x00" + data).digest()
+    return hashlib.sha256(b"\x00" + data).digest()
 
 
 def _parent_hash(left, right):
-    return hashlib.sha256(b"\\x01" + left + right).digest()
+    return hashlib.sha256(b"\x01" + left + right).digest()
 
 
 def merkle_root(leaves):
     """Return a hex root for byte leaves; empty input has a defined root."""
     if not leaves:
-        return hashlib.sha256(b"\\x02").hexdigest()
+        return hashlib.sha256(b"\x02").hexdigest()
     level = [_leaf_hash(leaf) for leaf in leaves]
     while len(level) > 1:
         if len(level) % 2:
