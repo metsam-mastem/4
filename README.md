@@ -57,3 +57,12 @@ At this stage, implementation and test claims must be marked **NOT RUN** until e
 ## License
 
 TBD — do not assume reuse rights until a license is selected.
+
+## Current implemented reference core
+
+The Python reference core includes Vec2/Vec3, rectangle and cuboid metrics, proportion constants, Fibonacci, D4/D8 symmetry transforms, graph validation and directed metrics, hash-chain provenance, Merkle inclusion proofs, and a small SVG graph renderer.
+
+Run locally:
+`PYTHONPATH=src python -m unittest discover -s tests -v`
+
+The Visual Shadow poster is in `assets/visual-shadow-atlas.svg`. It is a vector architecture map, not a payload-carrying lossless image.
