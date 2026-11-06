@@ -1,0 +1,22 @@
+# Roadmap and Acceptance Tests
+
+Phase 0: freeze semantics, especially += and =+, and define threat model.
+Phase 1: vectors, matrices, rectangles/cuboids, ratio profiles, D4/D8 tests.
+Phase 2: stable graph IDs, typed relations, provenance and snapshots.
+Phase 3: deterministic multi-scale visual layout, legend, mapping and collision checks.
+Phase 4: Git/Markdown/code/PDF/image ingestion and OCR language benchmarks.
+Phase 5: deterministic serialization, hashes, hash chain, Merkle inclusion/consistency proofs.
+Phase 6: secure lossless carrier with capacity tests, authenticated encryption, error correction and round-trip.
+Phase 7: local-first Studio and offline export/import.
+
+Acceptance IDs:
+MAT-01 vector operations; MAT-02 rectangle/cuboid formulas; MAT-03 exact ratio precision; MAT-04 D4 orbit; MAT-05 D8 group order 16.
+KG-01 edge endpoints; KG-02 stable identity.
+PROV-01 chain integrity; PROV-02 tamper detection.
+VIS-01 every rendered object maps to a node; VIS-02 no critical clipping.
+OCR-01 CER/WER by language.
+PACK-01 deterministic serialization; PACK-02 byte-exact round-trip.
+CRYPTO-01 modified ciphertext rejected.
+RESOURCE-01 bounded memory/time/pixels/nodes.
+
+All tests remain NOT RUN until executed in a real runtime.
