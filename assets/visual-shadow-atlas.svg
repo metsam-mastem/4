@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+<title id="title">SSG Visual Shadow Atlas</title>
+<desc id="desc">A layered knowledge map connecting source repositories to a graph, mathematical geometry, a multiscale visual poster, provenance verification, and reconstruction.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071321"/><stop offset=".55" stop-color="#111a35"/><stop offset="1" stop-color="#20122c"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#f3c66d"/><stop offset="1" stop-color="#ff8c6b"/></linearGradient>
+  <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#62d9e6"/><stop offset="1" stop-color="#8aa8ff"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#7183a8" stroke-opacity=".09"/></pattern>
+</defs>
+<rect width="1600" height="1000" fill="url(#bg)"/><rect width="1600" height="1000" fill="url(#grid)"/>
+<text x="64" y="78" fill="#f7d995" font-size="44" font-family="Arial,sans-serif" font-weight="700">SSG / VISUAL SHADOW ATLAS</text>
+<text x="66" y="116" fill="#a9bad7" font-size="20" font-family="Arial,sans-serif">From source identity to navigable knowledge and verifiable reconstruction</text>
+<path d="M64 145H1536" stroke="#6d7b9a" stroke-opacity=".5"/>
+<!-- left source panel -->
+<rect x="64" y="200" width="290" height="510" rx="22" fill="#142841" stroke="#4c91b6" stroke-width="2"/>
+<text x="94" y="246" fill="#83d8eb" font-size="24" font-weight="700" font-family="Arial">01 / SOURCE</text>
+<g font-family="monospace" font-size="18" fill="#e6edf8">
+<text x="96" y="296">repo/</text><text x="118" y="330">src/</text><text x="140" y="364">parser.py</text>
+<text x="140" y="398">graph.py</text><text x="118" y="444">docs/</text><text x="140" y="478">protocol.md</text>
+<text x="118" y="524">tests/</text><text x="140" y="558">test_graph.py</text>
+</g>
+<rect x="94" y="600" width="230" height="72" rx="12" fill="#0a1728" stroke="#426786"/>
+<text x="112" y="630" fill="#b7cbe4" font-size="15" font-family="Arial">CONTENT HASH</text><text x="112" y="654" fill="#f4d18b" font-size="16" font-family="monospace">sha256: 8f…d2</text>
+<!-- flow -->
+<path d="M355 455H405" stroke="url(#gold)" stroke-width="4" filter="url(#glow)"/><path d="M394 443L407 455L394 467" fill="none" stroke="#f3c66d" stroke-width="3"/>
+<!-- central graph -->
+<rect x="420" y="190" width="735" height="530" rx="24" fill="#111d38" stroke="#806caf" stroke-width="2"/>
+<text x="458" y="238" fill="#d8c4ff" font-size="24" font-weight="700" font-family="Arial">02 / CANONICAL KNOWLEDGE GRAPH</text>
+<g stroke="#9b91d8" stroke-opacity=".65" stroke-width="3" fill="none">
+<path d="M790 330L625 430L535 550M790 330L790 470L690 585M790 330L955 430L1060 550M790 470L955 590M625 430L690 585M955 430L955 590"/>
+</g>
+<g filter="url(#glow)">
+<circle cx="790" cy="330" r="62" fill="#3b2e66" stroke="#e2c4ff" stroke-width="3"/>
+<circle cx="625" cy="430" r="48" fill="#17465a" stroke="#6bd8e9" stroke-width="3"/>
+<circle cx="955" cy="430" r="48" fill="#533a2b" stroke="#f5bd73" stroke-width="3"/>
+<circle cx="790" cy="470" r="48" fill="#304b38" stroke="#95dca8" stroke-width="3"/>
+<circle cx="535" cy="550" r="36" fill="#1a3e54" stroke="#6bd8e9" stroke-width="2"/>
+<circle cx="690" cy="585" r="36" fill="#1a3e54" stroke="#6bd8e9" stroke-width="2"/>
+<circle cx="955" cy="590" r="36" fill="#4e352d" stroke="#f3bd79" stroke-width="2"/>
+<circle cx="1060" cy="550" r="36" fill="#4e352d" stroke="#f3bd79" stroke-width="2"/>
+</g>
+<g fill="#fff" text-anchor="middle" font-family="Arial" font-weight="700">
+<text x="790" y="338" font-size="20">PROJECT</text><text x="625" y="437" font-size="16">CODE</text><text x="955" y="437" font-size="16">DOCS</text><text x="790" y="477" font-size="16">TESTS</text>
+<text x="535" y="556" font-size="13">API</text><text x="690" y="591" font-size="13">MODEL</text><text x="955" y="596" font-size="13">CLAIM</text><text x="1060" y="556" font-size="13">PROOF</text>
+</g>
+<text x="458" y="680" fill="#aebbd5" font-size="16" font-family="Arial">Stable node IDs • typed edges • source spans • versions • evidence</text>
+<!-- math panel -->
+<rect x="1190" y="200" width="346" height="510" rx="22" fill="#292541" stroke="#a88bce" stroke-width="2"/>
+<text x="1220" y="246" fill="#e0c8ff" font-size="24" font-weight="700" font-family="Arial">03 / MATH ENGINE</text>
+<g font-family="Arial" font-size="22" fill="#f4eaff">
+<text x="1225" y="310">Vectors:  x′ = Ax + t</text>
+<text x="1225" y="360">Graph:    G = (V, E)</text>
+<text x="1225" y="410">Rectangle: A = w × h</text>
+<text x="1225" y="460">Cuboid:    V = abc</text>
+<text x="1225" y="510">Diagonal:  √(a²+b²+c²)</text>
+</g>
+<rect x="1220" y="548" width="286" height="126" rx="15" fill="#17172c" stroke="#725d99"/>
+<text x="1242" y="580" fill="#f5d18b" font-size="18" font-weight="700" font-family="Arial">PROPORTION PROFILES</text>
+<text x="1242" y="616" fill="#dce6f6" font-size="20" font-family="Arial">1 · √2 · √3 · √5 · φ · 2√2</text>
+<text x="1242" y="647" fill="#aebbd5" font-size="15" font-family="Arial">Fibonacci • π • Prime-indexed motifs</text>
+<!-- bottom visual shadow route -->
+<path d="M210 760H1385" stroke="#576b91" stroke-width="2" stroke-dasharray="9 12"/>
+<g>
+<rect x="64" y="785" width="310" height="144" rx="18" fill="#14283d" stroke="#559fba" stroke-width="2"/>
+<text x="94" y="826" fill="#7ed9e8" font-size="22" font-weight="700" font-family="Arial">04 / VISUAL SHADOW</text>
+<text x="94" y="866" fill="#e4edf8" font-size="17" font-family="Arial">Color • geometry • frequency</text><text x="94" y="894" fill="#e4edf8" font-size="17" font-family="Arial">Fractal • symmetry • zoom</text>
+<rect x="440" y="785" width="310" height="144" rx="18" fill="#2a2444" stroke="#a78aca" stroke-width="2"/>
+<text x="470" y="826" fill="#e0c8ff" font-size="22" font-weight="700" font-family="Arial">05 / PROVENANCE</text>
+<text x="470" y="866" fill="#e4edf8" font-size="17" font-family="Arial">Hash chain • Merkle proofs</text><text x="470" y="894" fill="#e4edf8" font-size="17" font-family="Arial">Signed checkpoints</text>
+<rect x="816" y="785" width="310" height="144" rx="18" fill="#3a2e22" stroke="#d29a60" stroke-width="2"/>
+<text x="846" y="826" fill="#f3c27d" font-size="22" font-weight="700" font-family="Arial">06 / DECODE</text>
+<text x="846" y="866" fill="#f8ecda" font-size="17" font-family="Arial">Parse • verify • authenticate</text><text x="846" y="894" fill="#f8ecda" font-size="17" font-family="Arial">Restore original bytes</text>
+<rect x="1192" y="785" width="344" height="144" rx="18" fill="#1d382e" stroke="#79c49a" stroke-width="2"/>
+<text x="1222" y="826" fill="#9be0b5" font-size="22" font-weight="700" font-family="Arial">07 / RECONSTRUCTION</text>
+<text x="1222" y="866" fill="#e3f5e8" font-size="17" font-family="Arial">Original source retained</text><text x="1222" y="894" fill="#e3f5e8" font-size="17" font-family="Arial">Hash equality = evidence</text>
+</g>
+<g fill="none" stroke="#e8bd75" stroke-width="3"><path d="M375 858H430"/><path d="M420 848L432 858L420 868"/><path d="M752 858H806"/><path d="M796 848L808 858L796 868"/><path d="M1128 858H1182"/><path d="M1172 848L1184 858L1172 868"/></g>
+<text x="800" y="973" fill="#8fa3c3" font-size="15" text-anchor="middle" font-family="Arial">A projection is not the source. Every visual mark must lead back to an identity, a version, and its evidence.</text>
+</svg>
