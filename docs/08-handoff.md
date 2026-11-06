@@ -50,3 +50,12 @@ Current local test suite: **27 tests passed**; compileall passed; a synthetic sc
 A bounded, read-only Git metadata adapter was added at src/ssg/git_ingest.py. It records commits reachable from local refs, parent ancestry, local branches and tags. Shallow or unavailable parent objects are explicit boundary nodes. The adapter uses fixed subprocess argument vectors (no shell), per-command timeouts, prompt suppression and a hard commit cap; it does not checkout, run project code, inspect blobs or mutate the repository.
 
 Tests were added first in tests/test_git_ingest.py and the initial red CI run was observed after the test-only commit. The implementation commit then triggered a new CI run. Its result must be checked before this feature is marked PASS. Remote refs, diff/tree/blob ingestion, blame, LFS and semantic parsing remain NOT IMPLEMENTED.
+
+
+## Git history adapter — verified
+
+The metadata-only adapter is implemented in src/ssg/git_ingest.py. It models commits, parent edges, local branches/tags and explicit shallow/unavailable boundary nodes. It uses bounded read-only Git commands, no shell, per-command timeouts and fails closed on commit-limit overflow. The graph's repository URI is portable and does not expose the absolute checkout path.
+
+Verification: GitHub Actions run 42167463018 completed SUCCESS. compileall passed and 32 unittest cases passed. This is CI evidence; no local test run was performed in the chat environment. Intermediate quoting failures were corrected and the final commit was rerun successfully.
+
+Still not implemented: remote refs, tree/blob/diff ingestion, rename detection, blame, semantic chunk extraction, OCR, Merkle consistency proofs/signing, and lossless carrier.
