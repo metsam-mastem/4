@@ -66,5 +66,15 @@ class GitHistoryIngestionTests(unittest.TestCase):
             self.assertEqual(len(graph.nodes), 1)
 
 
+    def test_repository_uri_does_not_leak_checkout_path(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "private-checkout-path"
+            self.make_repo(root)
+            graph = ingest_git_history(root, repository_id="owner/repo")
+            repository = next(node for node in graph.nodes.values() if node.type == "git_repository")
+            self.assertEqual(repository.source_uri, "git+repo://owner/repo")
+            self.assertNotIn(str(root), repository.source_uri)
+
+
 if __name__ == "__main__":
     unittest.main()
