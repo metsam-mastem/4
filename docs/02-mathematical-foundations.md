@@ -26,3 +26,14 @@ Store exact expressions such as sqrt(2), sqrt(3), sqrt(5), phi and pi separately
 
 ## Error and tolerance
 Absolute error ea=|xm-xt|. Relative error er=|xm-xt|/|xt| for xt≠0. Report measured ratio, target, absolute/relative deviation, uncertainty, and tolerance.
+
+## Three-dimensional vectors and directed graph metrics
+
+For v=(x,y,z), the Euclidean norm is ||v||₂=√(x²+y²+z²). Dot product:
+a·b=ax bx+ay by+az bz. Cross product:
+a×b=(ay bz−az by, az bx−ax bz, ax by−ay bx).
+Normalization v/||v||₂ is undefined for the zero vector and the implementation rejects it.
+
+For a directed graph, out-degree counts edges leaving a node and in-degree counts edges entering it. In the current implementation, parallel edges count individually for degree. Directed simple-graph density is:
+D=|{(u,v):u≠v and at least one directed edge u→v}|/[n(n−1)], n≥2.
+Parallel edges count once in density; self-loops are excluded; n<2 gives zero. These conventions are part of the API contract.
