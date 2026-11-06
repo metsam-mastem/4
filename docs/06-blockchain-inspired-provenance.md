@@ -14,3 +14,14 @@ Each provenance record includes artifact ID, source URI/repository/path, source 
 Git already supplies version history. A portable Merkle log can add efficient inclusion and consistency proofs. A hash does not prove authorship or truth; signatures address authorship under a key trust model. A Merkle root must be anchored in a trusted checkpoint to be meaningful.
 
 Recommended first mode: local-first Git-backed append-only journal + content hashes + optional signed checkpoints. No token, mining, validator network, or public chain in prototype.
+
+## Implemented Merkle convention (SSG reference core)
+
+The current reference implementation uses domain separation:
+- leaf: SHA-256(0x00 || leaf_bytes)
+- parent: SHA-256(0x01 || left_hash || right_hash)
+- empty tree root: SHA-256(0x02)
+
+At every level with an odd number of hashes, the final hash is duplicated. Inclusion proofs carry the sibling side and sibling digest. This is a deliberately simple SSG convention and is **not claimed to be RFC 6962-compatible**. Any future protocol standardization must freeze this tree-shape rule and publish cross-language test vectors.
+
+The hash-chain verifier now accepts an optional expected_head. Without a trusted or signed checkpoint containing that head, rewriting only the final journal event cannot be detected from the chain alone.
