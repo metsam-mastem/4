@@ -29,3 +29,13 @@ All tests remain NOT RUN until executed in a real runtime.
 - GIT-03: represent local branches/tags and their targets — implemented; CI verification pending.
 - GIT-04: fail closed on non-repositories, timeouts and commit-cap overflow — implemented; CI verification pending.
 - GIT-05: remote refs, diffs, trees/blobs, rename detection and blame — NOT IMPLEMENTED.
+
+
+### Git metadata ingestion — final gate
+- GIT-01 bounded local commit enumeration: PASS (GitHub Actions).
+- GIT-02 parent ancestry and explicit shallow boundaries: PASS (GitHub Actions).
+- GIT-03 local branch/tag references: PASS (GitHub Actions).
+- GIT-04 invalid repository and commit-cap rejection: PASS (GitHub Actions).
+- GIT-05 portable repository URI: PASS (GitHub Actions).
+- Verification run: 42167463018; compileall PASS; 32 tests PASS.
+- Remote refs, diffs, trees/blobs, rename detection and blame: NOT IMPLEMENTED.
