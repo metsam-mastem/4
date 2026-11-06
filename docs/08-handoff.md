@@ -21,3 +21,16 @@ Read README, architecture, mathematical foundations, and this handoff. Run pytho
 
 ## Status
 Repository metsam-mastem/4 confirmed. Initial README commit created. Remaining files and tests are to be verified against actual repository state. Runtime tests NOT RUN unless evidence is recorded.
+
+## Implementation update — 2026-11-06
+
+Implemented in the reference core:
+- D8 regular-octagon dihedral transforms: 16 orthogonal matrices (8 rotations + 8 reflections).
+- Matrix application to Vec2.
+- Vec3 operations: addition, subtraction, dot, cross, norm, normalization (zero-vector rejection).
+- Directed in-degree/out-degree and directed simple-graph density.
+- Domain-separated Merkle root, inclusion proof, and proof verification.
+- Hash-chain validation with optional trusted expected_head checkpoint.
+- Advanced acceptance tests for group closure, norm preservation, odd-leaf Merkle proofs, tamper rejection, Vec3, and graph metrics.
+
+Local run on the assembled reference checkout: 26 tests passed. The remote GitHub checkout itself was not executed because network/DNS was unavailable in the container; the files were retrieved and written through the GitHub connector. The local sources were assembled from the fetched repository contents and the just-authored changes. Treat remote CI as NOT RUN until a GitHub Actions run or an actual clone test is available.
