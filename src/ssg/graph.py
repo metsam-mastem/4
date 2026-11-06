@@ -67,3 +67,32 @@ def graph_density(graph):
            if edge.source_id in graph.nodes and edge.target_id in graph.nodes
            and edge.source_id != edge.target_id}
     return len(pairs)/(n*(n-1))
+
+
+def snapshot_hash(graph):
+    """Return a deterministic SHA-256 digest for a canonical graph snapshot."""
+    import hashlib
+    import json
+    errors = graph.validate()
+    if errors:
+        raise ValueError("cannot hash invalid graph: " + "; ".join(errors))
+    nodes = []
+    for node in sorted(graph.nodes.values(), key=lambda item: item.id):
+        nodes.append({
+            "id": node.id, "type": node.type, "label": node.label,
+            "source_uri": node.source_uri, "source_version": node.source_version,
+            "content_hash": node.content_hash, "metadata": node.metadata,
+        })
+    edges = []
+    for edge in sorted(graph.edges, key=lambda item: (item.id, item.source_id, item.target_id)):
+        edges.append({
+            "id": edge.id, "source_id": edge.source_id, "target_id": edge.target_id,
+            "relation": edge.relation, "evidence_uri": edge.evidence_uri,
+            "confidence": edge.confidence,
+        })
+    try:
+        payload = json.dumps({"nodes": nodes, "edges": edges}, sort_keys=True,
+                             separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    except (TypeError, ValueError) as exc:
+        raise ValueError("graph contains non-canonical metadata") from exc
+    return hashlib.sha256(payload).hexdigest()
