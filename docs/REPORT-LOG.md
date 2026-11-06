@@ -193,3 +193,52 @@ A later fetch verified README, REPORT-LOG, and mathcore files are readable from 
 - OCR و ارزیابی CER/WER برای فارسی و انگلیسی.
 - lossless carrier با benchmark ظرفیت، خطا و مقاومت در برابر آسیب.
 - آپلود PNG رستری قبلی هنوز انجام نشده؛ SVG برداری در مخزن موجود است.
+
+
+## ادامهٔ ژورنال — Source Ingestion و Snapshot Hash
+
+### هدف
+تبدیل ساختار واقعی یک پوشهٔ پروژه به گرافی قابل ردیابی، بدون اجرای کدهای ورودی و بدون تغییر فایل‌های اصلی.
+
+### قابلیت‌های افزوده‌شده
+- آداپتور `ingest_directory` برای ساخت repository/directory/file nodes.
+- یال‌های `contains` برای ساختار سلسله‌مراتبی.
+- SHA-256 فایل‌ها با خواندن قطعه‌ای، بدون بارگذاری کامل فایل در حافظه.
+- شناسهٔ پایدار بر مبنای namespace مخزن، نوع گره و مسیر نسبی.
+- امکان تعیین `repository_id` برای جلوگیری از برخورد دو مخزن هم‌نام.
+- URI قابل حمل از جنس `repo://...`.
+- هش قطعی snapshot گراف با مرتب‌سازی گره‌ها و یال‌ها و JSON canonical.
+- عدم دنبال‌کردن symlink، حذف `.git` و cacheهای رایج، تشخیص تغییر سادهٔ فایل هنگام هش‌کردن، سقف node و byte.
+- CLI نمونه برای خروجی SVG و manifest؛ خروجی باید بیرون از source tree باشد.
+
+### مرزبندی
+این آداپتور snapshot از working tree می‌سازد؛ تاریخچهٔ commit، branch، tag، blame، diff، Git LFS object، parsing معنایی و OCR را نمی‌خواند. SVG صرفاً نمایش ساختار و manifest است؛ دادهٔ اصلی را داخل خود حمل نمی‌کند.
+
+### TDD و آزمون
+- تست namespace متفاوت ابتدا RED شد؛ API هنوز repository_id را نمی‌پذیرفت.
+- پارامتر namespace به آداپتور افزوده و تست GREEN شد.
+- اجرای محلی نهایی: **27 tests, OK**.
+- compileall برای src، tests و examples موفق.
+- Smoke test با پروژهٔ ساختگی: 5 nodes، 4 edges، 2 files، 2 directories؛ SVG و manifest تولید شدند.
+- ورودی فقط خوانده شد؛ خروجی بیرون از درخت منبع نوشته شد.
+
+### Commitهای این مرحله
+- graph snapshot hashing: 9909ae20d9edf0e26eaf6e9c89f339390486e6c5
+- source ingestion initial: 34c0755029ba7f151c1d9d0d4e2fdcb9d2baaebe
+- ingestion tests: c7fb143082e31f5230c73f9f7988acb0b640fe05
+- CLI example: 49595db9a284d5a87c68442ea2cec2216ea8a240
+- stable ID separator corrections: 5547155ce4533f03481db5f9a8227b7bddf76447
+- CLI newline correction: 0e91be83a74dff8819982349bf17c6fd76640c07
+- explicit repository namespace: bde2059e1e66665f8d47fdd154b5e22eeb29737f
+- CLI repository namespace: e97bcef8a756f224f4addeda51c1b864fb91cce6
+- namespace test: 4976734e7e85ea6b38e4257cc36a5f277aa0c2b9
+- CLI output guard: 82236a0bfd2b91f192eeae47f1923fe945755000
+- source-ingestion specification: 35583bc710a7b3e084ed14514b7c808cb5a8035d
+
+### گام‌های بعدی
+1. Git metadata adapter برای commit/branch/tag/diff و انتساب revision دقیق.
+2. Parserهای Markdown/code و chunk-level source locators.
+3. OCR pipeline و benchmark فارسی/انگلیسی.
+4. layout engine چندمقیاسی با collision/overflow metrics.
+5. Merkle consistency proofs و امضای checkpoint.
+6. تست CI از GitHub Actions و گزارش قابل مشاهدهٔ آخرین اجرا.
