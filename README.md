@@ -80,3 +80,20 @@ PYTHONPATH=src python examples/scan_directory.py /path/to/project \
 ```
 
 The scanner does not inspect Git commit history, execute source files, follow symlinks, or preserve file bytes inside the SVG. See `docs/10-source-ingestion.md`.
+
+
+## Git history ingestion
+
+A separate read-only Git adapter now maps commit ancestry and local branch/tag refs into the canonical graph. It invokes a fixed set of Git metadata commands without a shell, disables terminal prompts and optional locks, applies per-command timeouts, and fails closed when the commit cap is exceeded. Shallow or unavailable parent objects are retained as explicit boundary nodes. It does not checkout refs, run repository scripts/hooks, read file blobs, or replace the working-tree scanner.
+
+```python
+from ssg.git_ingest import ingest_git_history
+
+graph = ingest_git_history(
+    "/path/to/checkout",
+    repository_id="owner/repository",
+    max_commits=10_000,
+)
+```
+
+The resulting graph includes git_commit, git_branch, git_tag, and (when needed) git_boundary nodes; parent, contains, and points_to edges. The Git adapter is metadata-only. It does not yet ingest diffs, per-commit trees/blobs, blame, or Git LFS objects.
