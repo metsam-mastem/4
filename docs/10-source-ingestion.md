@@ -68,3 +68,26 @@ The graph snapshot hashes sorted node and edge records in canonical JSON. It inc
 ## Acceptance coverage
 
 The ingestion tests cover nested trees, file hashing, source URI construction, stable IDs across checkout locations, distinct repository namespaces, \`.git\`/symlink exclusion, node and byte limits, deterministic snapshot hashing, and content-hash sensitivity.
+
+
+## Git history adapter (metadata-only)
+
+src/ssg/git_ingest.py adds a distinct read-only adapter for commit ancestry and local branch/tag references.
+
+### Graph model
+- git_repository: repository root identity.
+- git_commit: commit hash, author, authored timestamp, subject and parent hashes.
+- git_branch / git_tag: refs with points_to edges to their commit targets.
+- git_boundary: explicit shallow/unavailable parent or ref target; missing ancestry is not silently discarded.
+- parent edges point from child commit to parent commit.
+
+### Safety and limits
+- Uses fixed argv subprocess calls; no shell and no checkout.
+- Disables terminal prompts, system/global Git configuration and optional locks.
+- Applies a timeout to each Git command.
+- Requires the supplied path to be the working-tree root and rejects a symlink root.
+- Requests one record beyond max_commits and fails closed rather than returning a partial history graph.
+- Does not execute repository code or inspect file blobs. The existing working-tree scanner remains independent.
+
+### Known boundary
+This first adapter captures commits reachable from local refs, branch/tag references and parent edges. It does not yet capture remote refs, diffs, tree/blob objects, rename detection, blame, LFS payloads or semantic source chunks. Those remain separate planned adapters.
