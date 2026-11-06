@@ -55,3 +55,58 @@ Source traceability، identity stability، graph integrity، provenance complete
 
 ## وضعیت این مرحله
 این ژورنال جمع‌بندی مکالمهٔ SSG در دسترس و پژوهش این مرحله است؛ ادعای دسترسی به تمام تاریخچهٔ حساب یا فایل‌های بیرون از این مکالمه ندارد. مدارک جدید باید جداگانه ثبت شوند.
+
+
+## ثبت تحویل فنی — 2026-11-06
+
+### تخصیص مخزن و ایجاد فایل‌ها
+مخزن مقصد به‌صورت دقیق تأیید شد: metsam-mastem/4، عمومی، دسترسی admin و push موجود. اولین commit، README و سپس اسناد و اسکلت مرجع ایجاد شدند. فایل‌های افزوده‌شده:
+- docs/00-project-charter.md
+- docs/01-architecture.md
+- docs/02-mathematical-foundations.md
+- docs/03-proportion-engine.md
+- docs/04-precision-kpis.md
+- docs/05-visual-shadow-and-decoding.md
+- docs/06-blockchain-inspired-provenance.md
+- docs/07-iranian-geometry-research.md
+- docs/08-handoff.md
+- docs/09-roadmap-and-tests.md
+- docs/REPORT-LOG.md
+- src/ssg/__init__.py
+- src/ssg/mathcore.py
+- src/ssg/graph.py
+- src/ssg/provenance.py
+- src/ssg/visual.py
+- tests/test_core.py
+- assets/visual-shadow-poster-prompt.md
+- schemas/manifest.example.json
+- pyproject.toml
+
+### تصمیم‌ها و فرمول‌های تثبیت‌شده
+- نسبت مستطیل با بزرگ‌ترین ضلع تقسیم بر کوچک‌ترین ضلع تعریف شد.
+- خانواده‌های 1، √2، √3، √5، φ، 2 و 2√2 مستند شدند.
+- فرمول‌های مستطیل و مکعب‌مستطیل، بردار، ضرب داخلی، نرم، تبدیل دورانی، گراف و خطای نسبی ثبت شدند.
+- D4 به‌صورت گروه ۸ عضوی تقارن مربع و D8 در این پروژه به‌صورت گروه ۱۶ عضوی تقارن هشت‌ضلعی تعریف شد؛ این قرارداد باید ثابت بماند.
+- فیبوناچی برای شبکه و مقیاس‌بندی اختیاری، π برای هندسهٔ شعاعی، و اعداد اول برای توزیع/شاخص‌گذاری غیرامنیتی در نظر گرفته شدند.
+- اعداد گنگ در قالب عبارت دقیق و مقدار تقریبی همراه با precision نگهداری می‌شوند.
+
+### پیاده‌سازی مرجع
+اسکلت Python شامل Vec2، Rect، Cuboid، نسبت‌ها، Fibonacci، D4 orbit، KnowledgeGraph، اعتبارسنجی endpointها، hash-chain provenance و SVG renderer ایجاد شد. این یک هستهٔ مرجع کوچک است، نه محصول کامل.
+
+### آزمون و شواهد
+فایل آزمون نوشته شد، اما در این مرحله در runtime پروژه اجرا نشده است: وضعیت آزمون‌ها NOT RUN. وجود فایل تست به‌معنای PASS نیست. اجرای بعدی باید با Python 3.11+ و دستور درج‌شده در راهنمای تحویل انجام شود.
+
+### تصویر و دارایی‌های باینری
+پوستر مفهومی در مکالمه تولید شده و فایل محلی آن با نام a_futuristic_cyber_mystical_infographic_poster_wi.png در محیط کاری موجود است. GitHub connector مورد استفاده برای ایجاد فایل، مسیر UTF-8 text را فراهم می‌کند و آپلود مستقیم این فایل باینری 3.2MB از مسیر فعلی تأیید نشده است. بنابراین فعلاً prompt بازتولید پوستر در assets ثبت شده؛ فایل PNG هنوز در مخزن commit نشده است. این مورد BLOCKED/PENDING است، نه PASS.
+
+### محدودیت دامنهٔ کاوش
+این ژورنال تمام نکات SSG موجود در مکالمهٔ جاری و خلاصهٔ زمینهٔ قبلی SSG را تجمیع می‌کند؛ به معنی دسترسی کامل به همهٔ گفتگوهای حساب، فایل‌های خارج از این زمینه یا مخازن دیگر نیست. هر منبع جدید باید جداگانه بازیابی و به ژورنال افزوده شود.
+
+### گام‌های بعدی
+1. اجرای تست‌ها و ثبت خروجی واقعی.
+2. بازبینی code quality و edge cases.
+3. افزودن D8 transformations و tests.
+4. پیاده‌سازی Merkle tree واقعی با test vectors.
+5. Git ingestion adapter و source locator.
+6. تولید SVG poster از graph واقعی و ثبت node-to-source mapping.
+7. طراحی threat model و capacity benchmark قبل از visual lossless carrier.
