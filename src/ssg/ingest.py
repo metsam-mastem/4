@@ -24,7 +24,7 @@ def stable_node_id(repository_id: str, node_type: str, relative_path: str) -> st
     if not repository_id or not node_type or not relative_path:
         raise ValueError("repository_id, node_type and relative_path are required")
     normalized = Path(relative_path).as_posix()
-    payload = f"ssg-node-v1\\0{repository_id}\\0{node_type}\\0{normalized}".encode("utf-8")
+    payload = f"ssg-node-v1\0{repository_id}\\0{node_type}\\0{normalized}".encode("utf-8")
     digest = hashlib.sha256(payload).hexdigest()[:24]
     return f"ssg:{node_type}:{digest}"
 
