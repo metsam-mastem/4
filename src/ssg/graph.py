@@ -41,3 +41,29 @@ class KnowledgeGraph:
     def degree(self,node_id):
         if node_id not in self.nodes: raise KeyError(node_id)
         return sum(e.source_id==node_id or e.target_id==node_id for e in self.edges)
+
+
+def out_degree(graph, node_id):
+    """Count outgoing directed edges, including parallel edges and self-loops."""
+    if node_id not in graph.nodes: raise KeyError(node_id)
+    return sum(edge.source_id == node_id for edge in graph.edges)
+
+
+def in_degree(graph, node_id):
+    """Count incoming directed edges, including parallel edges and self-loops."""
+    if node_id not in graph.nodes: raise KeyError(node_id)
+    return sum(edge.target_id == node_id for edge in graph.edges)
+
+
+def graph_density(graph):
+    """Directed simple-graph density; unique ordered pairs, no self-loops.
+
+    Parallel edges count once for density. Self-loops are excluded. For n<2,
+    density is defined as zero.
+    """
+    n=len(graph.nodes)
+    if n<2: return 0.0
+    pairs={(edge.source_id,edge.target_id) for edge in graph.edges
+           if edge.source_id in graph.nodes and edge.target_id in graph.nodes
+           and edge.source_id != edge.target_id}
+    return len(pairs)/(n*(n-1))
