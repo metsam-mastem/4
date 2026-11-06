@@ -1,0 +1,9 @@
+{
+  "schema_version":"0.1.0",
+  "project":"SSG",
+  "projection":{"type":"semantic-poster","lossiness":"lossy","graph_snapshot_hash":"sha256:REPLACE","algorithm":"ssg-visual-shadow/0.1.0","profile":"sqrt2-grid+d4"},
+  "source":{"uri":"REPLACE","revision":"REPLACE","content_hash":"sha256:REPLACE"},
+  "geometry":{"ratio_expression":"sqrt(2)","ratio_decimal":1.4142135623730951,"precision_digits":16,"coordinate_system":"2d-cartesian"},
+  "provenance":{"journal_head":"REPLACE","transform_ids":[]},
+  "security":{"encryption":null,"key_id":null,"note":"Never put secret key material in this manifest."}
+}
