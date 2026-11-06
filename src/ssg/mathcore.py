@@ -104,3 +104,24 @@ def apply_matrix(matrix, point):
         raise ValueError("matrix must be 2x2")
     return Vec2(matrix[0][0]*point.x + matrix[0][1]*point.y,
                 matrix[1][0]*point.x + matrix[1][1]*point.y)
+
+
+@dataclass(frozen=True)
+class Vec3:
+    """Three-dimensional Euclidean vector."""
+    x: float
+    y: float
+    z: float
+    def __add__(self, other): return Vec3(self.x+other.x, self.y+other.y, self.z+other.z)
+    def __sub__(self, other): return Vec3(self.x-other.x, self.y-other.y, self.z-other.z)
+    def dot(self, other): return self.x*other.x+self.y*other.y+self.z*other.z
+    def cross(self, other):
+        return Vec3(self.y*other.z-self.z*other.y,
+                    self.z*other.x-self.x*other.z,
+                    self.x*other.y-self.y*other.x)
+    def norm(self): return sqrt(self.x*self.x+self.y*self.y+self.z*self.z)
+    def normalized(self):
+        magnitude=self.norm()
+        if magnitude==0: raise ValueError("zero vector cannot be normalized")
+        return Vec3(self.x/magnitude,self.y/magnitude,self.z/magnitude)
+    def scale(self, factor): return Vec3(self.x*factor,self.y*factor,self.z*factor)
