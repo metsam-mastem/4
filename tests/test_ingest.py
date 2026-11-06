@@ -73,3 +73,16 @@ class SnapshotHashTests(unittest.TestCase):
         self.assertNotEqual(snapshot_hash(a),snapshot_hash(b))
 
 if __name__=="__main__": unittest.main()
+
+
+class RepositoryNamespaceTests(unittest.TestCase):
+    def test_same_folder_name_can_have_distinct_repository_namespaces(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "same-name"
+            root.mkdir()
+            (root / "data.txt").write_text("same")
+            graph_a = ingest_directory(root, repository_id="owner-a/same-name")
+            graph_b = ingest_directory(root, repository_id="owner-b/same-name")
+            file_a = next(node for node in graph_a.nodes.values() if node.type == "file")
+            file_b = next(node for node in graph_b.nodes.values() if node.type == "file")
+            self.assertNotEqual(file_a.id, file_b.id)
